@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="TD4WViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="disc" translatesAutoresizingMaskIntoConstraints="NO" id="FBc-KS-yUy">
+                                <rect key="frame" x="10" y="134" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="FfP-kG-g0d"/>
+                                    <constraint firstAttribute="width" constant="300" id="bh4-Ez-kEK"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAN-5h-gYp">
+                                <rect key="frame" x="59" y="183" width="202" height="202"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="202" id="7Cs-ip-uyx"/>
+                                    <constraint firstAttribute="width" constant="202" id="Vn6-gs-E6r"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="50"/>
+                                <state key="normal" image="button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="button-highlighted"/>
+                                <connections>
+                                    <action selector="td4wButtonTapped:" destination="vXZ-lx-hvc" eventType="touchDown" id="jeg-0n-Ytc"/>
+                                </connections>
+                            </button>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="D17-oS-3SG">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="BwM-FR-Gju"/>
+                                    <constraint firstAttribute="width" constant="320" id="dDh-qM-5Es"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="Bka-u6-28d"/>
+                                </connections>
+                            </adBannerView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.78005420918367352" green="0.0" blue="0.0084643731671788722" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="FAN-5h-gYp" secondAttribute="centerY" id="2W8-hH-TzN"/>
+                            <constraint firstAttribute="centerY" secondItem="FBc-KS-yUy" secondAttribute="centerY" id="8xs-uN-Xy2"/>
+                            <constraint firstAttribute="centerX" secondItem="FBc-KS-yUy" secondAttribute="centerX" id="Sbj-kb-hFo"/>
+                            <constraint firstItem="D17-oS-3SG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="dDj-ju-t0H"/>
+                            <constraint firstAttribute="centerX" secondItem="FAN-5h-gYp" secondAttribute="centerX" id="hIP-AI-wVu"/>
+                            <constraint firstAttribute="trailing" secondItem="D17-oS-3SG" secondAttribute="trailing" id="kPV-Yt-BAN"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="D17-oS-3SG" secondAttribute="bottom" id="lvk-B0-zaw"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="adBannerView" destination="D17-oS-3SG" id="Hyi-iL-Wjx"/>
+                        <outlet property="disc" destination="FBc-KS-yUy" id="Ieg-I4-0RE"/>
+                        <outlet property="td4wButton" destination="FAN-5h-gYp" id="Khz-mn-9EC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="button" width="270" height="270"/>
+        <image name="button-highlighted" width="270" height="270"/>
+        <image name="disc" width="400" height="400"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
