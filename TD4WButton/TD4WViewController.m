@@ -10,9 +10,13 @@
 
 @interface TD4WViewController ()
 
-@property (nonatomic, strong) IBOutlet UIImageView *disc;
-@property (nonatomic, strong) IBOutlet UIButton *td4wButton;
+@property (nonatomic, strong) IBOutlet UIImageView  *disc;
+@property (nonatomic, strong) IBOutlet UIButton     *td4wButton;
 @property (nonatomic, strong) IBOutlet ADBannerView *adBannerView;
+
+@property (nonatomic, strong) IBOutlet UIView               *downloadView;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint   *downloadViewConstraint;
+@property (nonatomic, strong) IBOutlet UILabel              *downloadLabel;
 
 @property (nonatomic, strong) NSURL *td4wURL;
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
@@ -34,6 +38,10 @@
     self.adBannerView.hidden = YES;
     self.td4wURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"td4w" ofType:@"mp3"]];
     
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:@"Never turn down. Download the track."];
+    [string addAttributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)} range:NSMakeRange(17, 8)];
+    self.downloadLabel.attributedText = string;
+    
     [self rotate];
 }
 
@@ -51,6 +59,11 @@
     [self.audioPlayer play];
 }
 
+- (IBAction)downloadButtonTapped:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/us/album/turn-down-for-what/id786489553?i=786489670&uo=4"]];
+}
+
 - (void)rotate
 {
     [UIView animateWithDuration:4 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
@@ -61,17 +74,18 @@
     }];
 }
 
-
 #pragma mark iAd Delegate
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
     self.adBannerView.hidden = NO;
+    self.downloadViewConstraint.constant = 50;
 }
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
     self.adBannerView.hidden = YES;
+    self.downloadViewConstraint.constant = 0;
 }
 
 

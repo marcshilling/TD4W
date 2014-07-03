@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -48,22 +48,77 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="Bka-u6-28d"/>
                                 </connections>
                             </adBannerView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fire up your loud, Another round of shots..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="275" translatesAutoresizingMaskIntoConstraints="NO" id="MOc-oW-cRR" userLabel="Lyrics Label">
+                                <rect key="frame" x="25" y="39" width="275" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="D5h-nV-HBp"/>
+                                    <constraint firstAttribute="width" constant="275" id="rCa-YA-Nhc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIP-yg-PQC">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BZx-UL-UmM" userLabel="DL Button Overlay">
+                                        <rect key="frame" x="135" y="3" width="100" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="downloadButtonTapped:" destination="vXZ-lx-hvc" eventType="touchDown" id="Vwh-3N-VjF"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Never turn down. Download the track." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="272" translatesAutoresizingMaskIntoConstraints="NO" id="i6T-c2-RxH">
+                                        <rect key="frame" x="24" y="7" width="272" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="18"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="BZx-UL-UmM" firstAttribute="top" secondItem="mIP-yg-PQC" secondAttribute="top" constant="3" id="8gI-IM-RlM"/>
+                                    <constraint firstAttribute="bottom" secondItem="BZx-UL-UmM" secondAttribute="bottom" constant="3" id="CSN-h2-n31"/>
+                                    <constraint firstItem="BZx-UL-UmM" firstAttribute="leading" secondItem="mIP-yg-PQC" secondAttribute="leading" constant="135" id="MBq-ND-IaM"/>
+                                    <constraint firstAttribute="height" constant="50" id="O1h-Xa-2y2"/>
+                                    <constraint firstAttribute="trailing" secondItem="i6T-c2-RxH" secondAttribute="trailing" constant="24" id="QKq-FL-h7T"/>
+                                    <constraint firstItem="i6T-c2-RxH" firstAttribute="top" secondItem="mIP-yg-PQC" secondAttribute="top" constant="7" id="U8Q-Mu-IOn"/>
+                                    <constraint firstAttribute="bottom" secondItem="i6T-c2-RxH" secondAttribute="bottom" constant="7" id="ZJ3-kv-huo"/>
+                                    <constraint firstItem="i6T-c2-RxH" firstAttribute="leading" secondItem="mIP-yg-PQC" secondAttribute="leading" constant="24" id="cBJ-p1-beF"/>
+                                    <constraint firstAttribute="trailing" secondItem="BZx-UL-UmM" secondAttribute="trailing" constant="85" id="ftr-K2-2Kr"/>
+                                    <constraint firstAttribute="width" constant="320" id="nok-KK-CRW"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.78005420918367352" green="0.0" blue="0.0084643731671788722" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="mIP-yg-PQC" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="1Ar-Jh-nNj"/>
                             <constraint firstAttribute="centerY" secondItem="FAN-5h-gYp" secondAttribute="centerY" id="2W8-hH-TzN"/>
                             <constraint firstAttribute="centerY" secondItem="FBc-KS-yUy" secondAttribute="centerY" id="8xs-uN-Xy2"/>
+                            <constraint firstAttribute="trailing" secondItem="MOc-oW-cRR" secondAttribute="trailing" constant="20" id="IJc-Nl-VVo"/>
+                            <constraint firstItem="MOc-oW-cRR" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="25" id="Pbl-fu-JGO"/>
+                            <constraint firstItem="MOc-oW-cRR" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="19" id="Qnc-3O-qDP"/>
                             <constraint firstAttribute="centerX" secondItem="FBc-KS-yUy" secondAttribute="centerX" id="Sbj-kb-hFo"/>
                             <constraint firstItem="D17-oS-3SG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="dDj-ju-t0H"/>
                             <constraint firstAttribute="centerX" secondItem="FAN-5h-gYp" secondAttribute="centerX" id="hIP-AI-wVu"/>
                             <constraint firstAttribute="trailing" secondItem="D17-oS-3SG" secondAttribute="trailing" id="kPV-Yt-BAN"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="mIP-yg-PQC" secondAttribute="bottom" id="kWW-ii-TaM"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="D17-oS-3SG" secondAttribute="bottom" id="lvk-B0-zaw"/>
+                            <constraint firstAttribute="trailing" secondItem="mIP-yg-PQC" secondAttribute="trailing" id="yjz-j2-w6M"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="adBannerView" destination="D17-oS-3SG" id="Hyi-iL-Wjx"/>
                         <outlet property="disc" destination="FBc-KS-yUy" id="Ieg-I4-0RE"/>
+                        <outlet property="downloadLabel" destination="i6T-c2-RxH" id="Frz-BU-eMr"/>
+                        <outlet property="downloadView" destination="mIP-yg-PQC" id="4yk-8K-jq8"/>
+                        <outlet property="downloadViewConstraint" destination="kWW-ii-TaM" id="g8Y-8s-bSX"/>
                         <outlet property="td4wButton" destination="FAN-5h-gYp" id="Khz-mn-9EC"/>
                     </connections>
                 </viewController>
