@@ -17,16 +17,10 @@ static NSString * const TD4WService = @"td4w-service";
 @property (nonatomic, strong) IBOutlet UIButton     *td4wButton;
 @property (nonatomic, strong) IBOutlet ADBannerView *adBannerView;
 
-@property (nonatomic, strong) IBOutlet UISwitch     *hostSwitch;
+@property (nonatomic, strong) IBOutlet UISwitch     *p2pSwitch;
+@property (nonatomic, strong) IBOutlet UILabel      *p2pLabel;
 
-@property (nonatomic, strong) MCPeerID                  *localPeerID;
-@property (nonatomic, strong) MCNearbyServiceBrowser    *serviceBrowser;
-@property (nonatomic, strong) MCNearbyServiceAdvertiser *serviceAdvertiser;
-@property (nonatomic, strong) MCSession                 *session;
-
-//@property (nonatomic, strong) IBOutlet UIView               *downloadView;
-//@property (nonatomic, strong) IBOutlet NSLayoutConstraint   *downloadViewConstraint;
-//@property (nonatomic, strong) IBOutlet UILabel              *downloadLabel;
+@property (nonatomic, strong) SessionController *session;
 
 @property (nonatomic, strong) NSURL *td4wURL;
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
@@ -48,21 +42,6 @@ static NSString * const TD4WService = @"td4w-service";
     self.adBannerView.hidden = YES;
     self.td4wURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"td4w" ofType:@"mp3"]];
     
-    self.localPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
-    self.session = [[MCSession alloc] initWithPeer:self.localPeerID securityIdentity:nil encryptionPreference:MCEncryptionNone];
-    self.session.delegate = self;
-    
-    self.serviceBrowser = [[MCNearbyServiceBrowser alloc] initWithPeer:self.localPeerID serviceType:TD4WService];
-    self.serviceBrowser.delegate = self;
-    
-    self.serviceAdvertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:self.localPeerID discoveryInfo:nil serviceType:TD4WService];
-    self.serviceAdvertiser.delegate = self;
-    [self.serviceAdvertiser startAdvertisingPeer];
-
-//    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:@"Never turn down. Download the track."];
-//    [string addAttributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)} range:NSMakeRange(17, 8)];
-//    self.downloadLabel.attributedText = string;
-    
     [self rotate];
 }
 
@@ -72,77 +51,38 @@ static NSString * const TD4WService = @"td4w-service";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - MCSessionDelegate
+#pragma mark - SessionControllerDelegate protocol conformance
 
-- (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
+- (void)sessionDidChangeState
 {
-    [self playtd4w];
-}
-
-- (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
-{
-    // Empty implementation
-}
-
-- (void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID
-{
-    // Empty implementation
-}
-
-- (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress
-{
-    // Empty implementation
-}
-
-- (void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error
-{
-    // Empty implementation
-}
-
-#pragma mark - MCNearbyServiceAdvertiserDelegate
-
-- (void)advertiser:(MCNearbyServiceAdvertiser *)advertise didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void(^)(BOOL accept, MCSession *session))invitationHandler
-{
-    //NSLog(@"Received invitiation from peer: %@", peerID);
-    
-    [UIActionSheet showInView:self.view withTitle:[NSString stringWithFormat:@"Received Invitation From %@", peerID.displayName] cancelButtonTitle:@"Turn Down" destructiveButtonTitle:nil otherButtonTitles:@[@"!! Turn Up !!"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-        BOOL acceptedInvitation = (buttonIndex == [actionSheet firstOtherButtonIndex]);
-        if (acceptedInvitation) {
-            [self.hostSwitch setOn:NO];
-            [self hostSwitchValueChanged:self.hostSwitch];
+    // Ensure UI updates occur on the main queue.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.p2pSwitch.isOn) {
+            self.p2pLabel.text = [NSString stringWithFormat:@"Turnt up with %d others!", (int)self.session.connectedPeers.count];
         }
-        invitationHandler(acceptedInvitation, self.session);
-    }];
+        else {
+            self.p2pLabel.text = @"Turn up with others nearby!";
+        }
+    });
 }
 
-- (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
+- (void)sesssionDidReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID;
 {
-    //NSLog(@"Found peer: %@", peerID);
-
-    [self.serviceBrowser invitePeer:peerID toSession:self.session withContext:nil timeout:10];
+    [self TURNDOWNFORWHAT];
 }
 
-- (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
-{
-    // Empty implementation
-}
-
-
-- (IBAction)hostSwitchValueChanged:(UISwitch *)sw
+- (IBAction)p2pSwitchValueChanged:(UISwitch *)sw
 {
     if (sw.isOn) {
-        [self.serviceBrowser startBrowsingForPeers];
+        self.session = [[SessionController alloc] init];
+        self.session.delegate = self;
     }
     else {
-        [self.serviceBrowser stopBrowsingForPeers];
-        
-        [self.session disconnect];
-        self.session = [[MCSession alloc] initWithPeer:self.localPeerID securityIdentity:nil encryptionPreference:MCEncryptionNone];
-        self.session.delegate = self;
+        self.session = nil;
     }
 }
 
-- (void)playtd4w
+- (void)TURNDOWNFORWHAT
 {
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:self.td4wURL error:nil];
     self.audioPlayer.numberOfLoops = 0;
@@ -152,22 +92,11 @@ static NSString * const TD4WService = @"td4w-service";
 
 - (IBAction)td4wButtonTapped:(id)sender
 {
-    if (self.session.connectedPeers.count > 0) {
-        NSData *data = [@"TURN DOWN FOR WHAT" dataUsingEncoding:NSUTF8StringEncoding];
-        
-        NSError *error = nil;
-        if (![self.session sendData:data toPeers:self.session.connectedPeers withMode:MCSessionSendDataReliable error:&error]) {
-            NSLog(@"[Error] %@", error);
-        }
+    if (self.p2pSwitch.isOn) {
+        [self.session fireMessage];
     }
-    
-    [self playtd4w];
+    [self TURNDOWNFORWHAT];
 }
-
-//- (IBAction)downloadButtonTapped:(id)sender
-//{
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/us/album/turn-down-for-what/id786489553?i=786489670&uo=4"]];
-//}
 
 - (void)rotate
 {
@@ -184,13 +113,11 @@ static NSString * const TD4WService = @"td4w-service";
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
     self.adBannerView.hidden = NO;
-    //self.downloadViewConstraint.constant = 50;
 }
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
     self.adBannerView.hidden = YES;
-    //self.downloadViewConstraint.constant = 0;
 }
 
 
