@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
 #import <AVFoundation/AVFoundation.h>
+#import <MultipeerConnectivity/MultipeerConnectivity.h>
 
-@interface TD4WViewController : UIViewController <UIWebViewDelegate, ADBannerViewDelegate, AVAudioPlayerDelegate>
+@interface TD4WViewController : UIViewController <UIWebViewDelegate, ADBannerViewDelegate, AVAudioPlayerDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate>
 
 @end
