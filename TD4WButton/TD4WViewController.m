@@ -58,10 +58,20 @@ static NSString * const TD4WService = @"td4w-service";
     // Ensure UI updates occur on the main queue.
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.p2pSwitch.isOn) {
-            self.p2pLabel.text = [NSString stringWithFormat:@"Turnt up with %d others!", (int)self.session.connectedPeers.count];
+            if (self.session.connectedPeers.count == 0) {
+                self.p2pLabel.text = @"Waiting for others...";
+            }
+            else if (self.session.connectedPeers.count == 1) {
+                self.p2pLabel.text = @"Turnt up with 1 other!";
+            }
+            else {
+                self.p2pLabel.text = [NSString stringWithFormat:@"Turnt up with %d others!", (int)self.session.connectedPeers.count];
+            }
         }
         else {
-            self.p2pLabel.text = @"Turn up with others nearby!";
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"Turn up with others nearby!\n(Wi-Fi or Bluetooth required)"];
+            [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:12.f] range:NSMakeRange(27, 28)];
+            self.p2pLabel.attributedText = str;
         }
     });
 }
@@ -76,9 +86,18 @@ static NSString * const TD4WService = @"td4w-service";
     if (sw.isOn) {
         self.session = [[SessionController alloc] init];
         self.session.delegate = self;
+        self.p2pLabel.text = @"Waiting for others...";
     }
     else {
-        self.session = nil;
+        // Dealloc this in the background because it takes some time to clean up
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            self.session = nil;
+        });
+        
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"Turn up with others nearby!\n(Wi-Fi or Bluetooth required)"];
+        [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:20] range:NSMakeRange(0, 27)];
+        [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:12] range:NSMakeRange(27, 30)];
+        self.p2pLabel.attributedText = str;
     }
 }
 

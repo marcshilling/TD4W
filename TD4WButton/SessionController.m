@@ -30,7 +30,7 @@
 
 @implementation SessionController
 
-static NSString * const kMCSessionServiceType = @"mcsessionp2p";
+static NSString * const kMCSessionServiceType = @"td4w-play";
 
 #pragma mark - Initializer
 
@@ -145,7 +145,7 @@ static NSString * const kMCSessionServiceType = @"mcsessionp2p";
 - (void)fireMessage
 {
     if (self.connectedPeers.count > 0) {
-        NSData *data = [@"TURN DOWN FOR WHAT" dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *data = [@"TD4W" dataUsingEncoding:NSUTF8StringEncoding];
         
         NSError *error = nil;
         if (![self.session sendData:data toPeers:self.connectedPeers withMode:MCSessionSendDataUnreliable error:&error]) {
@@ -172,7 +172,7 @@ static NSString * const kMCSessionServiceType = @"mcsessionp2p";
 
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
-    NSLog(@"Peer [%@] changed state to %@", peerID.displayName, [self stringForPeerConnectionState:state]);
+    //NSLog(@"Peer [%@] changed state to %@", peerID.displayName, [self stringForPeerConnectionState:state]);
     
     switch (state)
     {
@@ -204,25 +204,25 @@ static NSString * const kMCSessionServiceType = @"mcsessionp2p";
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
     // Decode the incoming data to a UTF8 encoded string
-    NSString *receivedMessage = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    //NSString *receivedMessage = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    //NSLog(@"didReceiveData %@ from %@", receivedMessage, peerID.displayName);
     
-    NSLog(@"didReceiveData %@ from %@", receivedMessage, peerID.displayName);
     [self.delegate sesssionDidReceiveData:data fromPeer:peerID];
 }
 
 - (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress
 {
-    NSLog(@"didStartReceivingResourceWithName [%@] from %@ with progress [%@]", resourceName, peerID.displayName, progress);
+    //NSLog(@"didStartReceivingResourceWithName [%@] from %@ with progress [%@]", resourceName, peerID.displayName, progress);
 }
 
 - (void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error
 {
-    NSLog(@"didFinishReceivingResourceWithName [%@] from %@", resourceName, peerID.displayName);
+    //NSLog(@"didFinishReceivingResourceWithName [%@] from %@", resourceName, peerID.displayName);
     
     // If error is not nil something went wrong
     if (error)
     {
-        NSLog(@"Error [%@] receiving resource from %@ ", [error localizedDescription], peerID.displayName);
+        //NSLog(@"Error [%@] receiving resource from %@ ", [error localizedDescription], peerID.displayName);
     }
     else
     {
@@ -232,13 +232,13 @@ static NSString * const kMCSessionServiceType = @"mcsessionp2p";
         NSString *copyPath = [NSString stringWithFormat:@"%@/%@", [paths firstObject], resourceName];
         if (![[NSFileManager defaultManager] copyItemAtPath:[localURL path] toPath:copyPath error:nil])
         {
-            NSLog(@"Error copying resource to documents directory");
+            //NSLog(@"Error copying resource to documents directory");
         }
         else
         {
             // Get a URL for the path we just copied the resource to
-            NSURL *url = [NSURL fileURLWithPath:copyPath];
-            NSLog(@"url = %@", url);
+            //NSURL *url = [NSURL fileURLWithPath:copyPath];
+            //NSLog(@"url = %@", url);
         }
     }
 }
@@ -246,7 +246,7 @@ static NSString * const kMCSessionServiceType = @"mcsessionp2p";
 // Streaming API not utilized in this sample code
 - (void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID
 {
-    NSLog(@"didReceiveStream %@ from %@", streamName, peerID.displayName);
+    //NSLog(@"didReceiveStream %@ from %@", streamName, peerID.displayName);
 }
 
 #pragma mark - MCNearbyServiceBrowserDelegate protocol conformance
@@ -256,7 +256,7 @@ static NSString * const kMCSessionServiceType = @"mcsessionp2p";
 {
     NSString *remotePeerName = peerID.displayName;
     
-    NSLog(@"Browser found %@", remotePeerName);
+    //NSLog(@"Browser found %@", remotePeerName);
     
     MCPeerID *myPeerID = self.session.myPeerID;
     
@@ -264,12 +264,12 @@ static NSString * const kMCSessionServiceType = @"mcsessionp2p";
     
     if (shouldInvite)
     {
-        NSLog(@"Inviting %@", remotePeerName);
+        //NSLog(@"Inviting %@", remotePeerName);
         [browser invitePeer:peerID toSession:self.session withContext:nil timeout:30.0];
     }
     else
     {
-        NSLog(@"Not inviting %@", remotePeerName);
+        //NSLog(@"Not inviting %@", remotePeerName);
     }
     
     [self updateDelegate];
@@ -277,7 +277,7 @@ static NSString * const kMCSessionServiceType = @"mcsessionp2p";
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
-    NSLog(@"lostPeer %@", peerID.displayName);
+    //NSLog(@"lostPeer %@", peerID.displayName);
     
     [self.connectingPeersOrderedSet removeObject:peerID];
     [self.disconnectedPeersOrderedSet addObject:peerID];
@@ -287,14 +287,14 @@ static NSString * const kMCSessionServiceType = @"mcsessionp2p";
 
 - (void)browser:(MCNearbyServiceBrowser *)browser didNotStartBrowsingForPeers:(NSError *)error
 {
-    NSLog(@"didNotStartBrowsingForPeers: %@", error);
+    //NSLog(@"didNotStartBrowsingForPeers: %@", error);
 }
 
 #pragma mark - MCNearbyServiceAdvertiserDelegate protocol conformance
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void(^)(BOOL accept, MCSession *session))invitationHandler
 {
-    NSLog(@"didReceiveInvitationFromPeer %@", peerID.displayName);
+    //NSLog(@"didReceiveInvitationFromPeer %@", peerID.displayName);
     
     invitationHandler(YES, self.session);
     
@@ -306,7 +306,7 @@ static NSString * const kMCSessionServiceType = @"mcsessionp2p";
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didNotStartAdvertisingPeer:(NSError *)error
 {
-    NSLog(@"didNotStartAdvertisingForPeers: %@", error);
+    //NSLog(@"didNotStartAdvertisingForPeers: %@", error);
 }
 
 @end
