@@ -42,6 +42,10 @@ static NSString * const TD4WService = @"td4w-service";
     self.adBannerView.hidden = YES;
     self.td4wURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"td4w" ofType:@"mp3"]];
     
+    NSError *error = nil;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+    [[AVAudioSession sharedInstance] setActive:YES error:&error];
+    
     [self rotate];
 }
 
