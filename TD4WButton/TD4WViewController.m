@@ -20,10 +20,16 @@ static NSString * const TD4WService = @"td4w-service";
 @property (nonatomic, strong) IBOutlet UISwitch     *p2pSwitch;
 @property (nonatomic, strong) IBOutlet UILabel      *p2pLabel;
 
+@property (nonatomic, strong) IBOutlet UILabel      *turntLevelLabel;
+@property (nonatomic, strong) IBOutlet UILabel      *highScoreLabel;
+
 @property (nonatomic, strong) SessionController *session;
 
 @property (nonatomic, strong) NSURL *td4wURL;
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+
+@property (nonatomic) NSInteger turntLevel;
+@property (nonatomic) NSInteger highScore;
 
 @end
 
@@ -38,6 +44,10 @@ static NSString * const TD4WService = @"td4w-service";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.turntLevel = 0;
+    self.highScore = [[NSUserDefaults standardUserDefaults] integerForKey:@"highscore"];
+    self.highScoreLabel.text = [NSString stringWithFormat:@"High Score: %ld", (long)self.highScore];
     
     self.adBannerView.hidden = YES;
     self.td4wURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"td4w" ofType:@"mp3"]];
@@ -82,7 +92,9 @@ static NSString * const TD4WService = @"td4w-service";
 
 - (void)sesssionDidReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID;
 {
-    [self TURNDOWNFORWHAT];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self TURNDOWNFORWHAT];
+    });
 }
 
 - (IBAction)p2pSwitchValueChanged:(UISwitch *)sw
@@ -107,6 +119,14 @@ static NSString * const TD4WService = @"td4w-service";
 
 - (void)TURNDOWNFORWHAT
 {
+    self.turntLevel = self.turntLevel + (self.session.connectedPeers.count + 1);
+    self.turntLevelLabel.text = [NSString stringWithFormat:@"Turnt Level: %ld", (long)self.turntLevel];
+    if (self.turntLevel > self.highScore) {
+        self.highScore = self.turntLevel;
+        self.highScoreLabel.text = [NSString stringWithFormat:@"High Score: %ld", (long)self.highScore];
+        [[NSUserDefaults standardUserDefaults] setObject:@(self.highScore) forKey:@"highscore"];
+    }
+    
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:self.td4wURL error:nil];
     self.audioPlayer.numberOfLoops = 0;
     self.audioPlayer.delegate = self;
@@ -131,11 +151,15 @@ static NSString * const TD4WService = @"td4w-service";
     }];
 }
 
+- (IBAction)unwindToThisViewController:(UIStoryboardSegue *)unwindSegue
+{
+}
+
 #pragma mark iAd Delegate
 
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
-    self.adBannerView.hidden = NO;
+    //self.adBannerView.hidden = NO;
 }
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
