@@ -20,6 +20,9 @@
 		01C42CCD195B14DE001634D0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C42CCC195B14DE001634D0 /* iAd.framework */; };
 		01C42CCF195B1912001634D0 /* td4w.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 01C42CCE195B1912001634D0 /* td4w.mp3 */; };
 		01C42CD1195B1971001634D0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C42CD0195B1971001634D0 /* AVFoundation.framework */; };
+		01D88B3619815E290098103F /* TD4WTranslationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D88B3519815E290098103F /* TD4WTranslationCell.m */; };
+		01D88B3C1981691F0098103F /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D88B3B1981691F0098103F /* GradientView.m */; };
+		01E95696198149A600DA62BD /* TD4WTranslationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E95695198149A600DA62BD /* TD4WTranslationViewController.m */; };
 		01FD7CD1197431D40073B3EB /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FD7CD0197431D40073B3EB /* MultipeerConnectivity.framework */; };
 		4F050F3F14344258B1333A47 /* libPods-TD4WButton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6C4B048F8145028C6B3044 /* libPods-TD4WButton.a */; };
 /* End PBXBuildFile section */
@@ -45,6 +48,12 @@
 		01C42CCC195B14DE001634D0 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		01C42CCE195B1912001634D0 /* td4w.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = td4w.mp3; sourceTree = "<group>"; };
 		01C42CD0195B1971001634D0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		01D88B3419815E290098103F /* TD4WTranslationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TD4WTranslationCell.h; sourceTree = "<group>"; };
+		01D88B3519815E290098103F /* TD4WTranslationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TD4WTranslationCell.m; sourceTree = "<group>"; };
+		01D88B3A1981691F0098103F /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		01D88B3B1981691F0098103F /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		01E95694198149A600DA62BD /* TD4WTranslationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TD4WTranslationViewController.h; sourceTree = "<group>"; };
+		01E95695198149A600DA62BD /* TD4WTranslationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TD4WTranslationViewController.m; sourceTree = "<group>"; };
 		01FD7CD0197431D40073B3EB /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		5F65DEAF63DE41EFAEA30965 /* Pods-TD4WButton.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TD4WButton.xcconfig"; path = "Pods/Pods-TD4WButton.xcconfig"; sourceTree = "<group>"; };
 		BB6C4B048F8145028C6B3044 /* libPods-TD4WButton.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TD4WButton.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,11 +139,11 @@
 		01C42C9A195B1362001634D0 /* TD4WButton */ = {
 			isa = PBXGroup;
 			children = (
-				01B95AEB19756AEB00E110AC /* UI */,
 				01C42CA3195B1362001634D0 /* TD4WAppDelegate.h */,
 				01C42CA4195B1362001634D0 /* TD4WAppDelegate.m */,
-				01C42CAC195B1362001634D0 /* TD4WViewController.h */,
-				01C42CAD195B1362001634D0 /* TD4WViewController.m */,
+				01B95AEB19756AEB00E110AC /* UI */,
+				01D88B38198168EE0098103F /* View Controllers */,
+				01D88B39198168FF0098103F /* Views */,
 				01B95AE919756AB500E110AC /* SessionController */,
 				01B95AEA19756ADD00E110AC /* Resources */,
 				01C42C9B195B1362001634D0 /* Supporting Files */,
@@ -151,6 +160,28 @@
 				01C42CA2195B1362001634D0 /* TD4WButton-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01D88B38198168EE0098103F /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				01C42CAC195B1362001634D0 /* TD4WViewController.h */,
+				01C42CAD195B1362001634D0 /* TD4WViewController.m */,
+				01E95694198149A600DA62BD /* TD4WTranslationViewController.h */,
+				01E95695198149A600DA62BD /* TD4WTranslationViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		01D88B39198168FF0098103F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				01D88B3A1981691F0098103F /* GradientView.h */,
+				01D88B3B1981691F0098103F /* GradientView.m */,
+				01D88B3419815E290098103F /* TD4WTranslationCell.h */,
+				01D88B3519815E290098103F /* TD4WTranslationCell.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,9 +291,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01D88B3619815E290098103F /* TD4WTranslationCell.m in Sources */,
 				01C42CAE195B1362001634D0 /* TD4WViewController.m in Sources */,
 				01C42CA1195B1362001634D0 /* main.m in Sources */,
+				01D88B3C1981691F0098103F /* GradientView.m in Sources */,
 				01A8DB6E197480F1009092E4 /* SessionController.m in Sources */,
+				01E95696198149A600DA62BD /* TD4WTranslationViewController.m in Sources */,
 				01C42CA5195B1362001634D0 /* TD4WAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,7 +408,7 @@
 				INFOPLIST_FILE = "TD4WButton/TD4WButton-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CD645CEA-2CCA-4AAF-BFC9-306E0981ECC5";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -393,7 +427,7 @@
 				INFOPLIST_FILE = "TD4WButton/TD4WButton-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CD645CEA-2CCA-4AAF-BFC9-306E0981ECC5";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
