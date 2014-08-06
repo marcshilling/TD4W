@@ -3,7 +3,7 @@
 
 target "TD4WButton" do
 
-pod 'UIActionSheet+Blocks', '~> 0.8'
+pod 'UIActionSheet+Blocks'
 
 end
 
