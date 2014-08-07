@@ -40,7 +40,7 @@ static NSString * const TD4WService = @"td4w-service";
 	// Do any additional setup after loading the view, typically from a nib.
     
     self.adBannerView.hidden = YES;
-    self.td4wURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"td4w" ofType:@"mp3"]];
+    self.td4wURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"air-horn" ofType:@"wav"]];
     
     self.infoButton.tintColor = [UIColor whiteColor];
     

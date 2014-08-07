@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012938D81994056100BF37C7 /* air-horn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 012938D71994056100BF37C7 /* air-horn.wav */; };
 		01A8DB6E197480F1009092E4 /* SessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A8DB6D197480F1009092E4 /* SessionController.m */; };
 		01C42C95195B1362001634D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C42C94195B1362001634D0 /* Foundation.framework */; };
 		01C42C97195B1362001634D0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C42C96195B1362001634D0 /* CoreGraphics.framework */; };
@@ -18,16 +19,13 @@
 		01C42CAE195B1362001634D0 /* TD4WViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C42CAD195B1362001634D0 /* TD4WViewController.m */; };
 		01C42CB0195B1362001634D0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C42CAF195B1362001634D0 /* Images.xcassets */; };
 		01C42CCD195B14DE001634D0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C42CCC195B14DE001634D0 /* iAd.framework */; };
-		01C42CCF195B1912001634D0 /* td4w.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 01C42CCE195B1912001634D0 /* td4w.mp3 */; };
 		01C42CD1195B1971001634D0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C42CD0195B1971001634D0 /* AVFoundation.framework */; };
-		01D88B3619815E290098103F /* TD4WTranslationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D88B3519815E290098103F /* TD4WTranslationCell.m */; };
-		01D88B3C1981691F0098103F /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D88B3B1981691F0098103F /* GradientView.m */; };
-		01E95696198149A600DA62BD /* TD4WTranslationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E95695198149A600DA62BD /* TD4WTranslationViewController.m */; };
 		01FD7CD1197431D40073B3EB /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FD7CD0197431D40073B3EB /* MultipeerConnectivity.framework */; };
 		4F050F3F14344258B1333A47 /* libPods-TD4WButton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6C4B048F8145028C6B3044 /* libPods-TD4WButton.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		012938D71994056100BF37C7 /* air-horn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "air-horn.wav"; sourceTree = "<group>"; };
 		01A8DB6C197480F1009092E4 /* SessionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionController.h; sourceTree = "<group>"; };
 		01A8DB6D197480F1009092E4 /* SessionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionController.m; sourceTree = "<group>"; };
 		01C42C91195B1362001634D0 /* TD4WButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TD4WButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				01C42CAF195B1362001634D0 /* Images.xcassets */,
+				012938D71994056100BF37C7 /* air-horn.wav */,
 				01C42CCE195B1912001634D0 /* td4w.mp3 */,
 			);
 			name = Resources;
@@ -245,8 +244,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C42CB0195B1362001634D0 /* Images.xcassets in Resources */,
-				01C42CCF195B1912001634D0 /* td4w.mp3 in Resources */,
 				01C42CA8195B1362001634D0 /* Main_iPhone.storyboard in Resources */,
+				012938D81994056100BF37C7 /* air-horn.wav in Resources */,
 				01C42C9F195B1362001634D0 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,12 +290,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01D88B3619815E290098103F /* TD4WTranslationCell.m in Sources */,
 				01C42CAE195B1362001634D0 /* TD4WViewController.m in Sources */,
 				01C42CA1195B1362001634D0 /* main.m in Sources */,
-				01D88B3C1981691F0098103F /* GradientView.m in Sources */,
 				01A8DB6E197480F1009092E4 /* SessionController.m in Sources */,
-				01E95696198149A600DA62BD /* TD4WTranslationViewController.m in Sources */,
 				01C42CA5195B1362001634D0 /* TD4WAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,7 +404,7 @@
 				INFOPLIST_FILE = "TD4WButton/TD4WButton-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "CD645CEA-2CCA-4AAF-BFC9-306E0981ECC5";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -427,7 +423,7 @@
 				INFOPLIST_FILE = "TD4WButton/TD4WButton-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "CD645CEA-2CCA-4AAF-BFC9-306E0981ECC5";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
